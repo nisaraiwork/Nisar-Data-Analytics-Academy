@@ -1,0 +1,6 @@
+{
+  "name": "Nisar Data Analytics Academy",
+  "description": "Bilingual Urdu + English data analytics academy with interactive lessons, hands-on practice, built-in CSV dataset checker, and real project dashboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

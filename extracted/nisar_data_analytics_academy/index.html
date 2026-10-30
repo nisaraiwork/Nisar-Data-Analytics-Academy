@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nisar Data Analytics Academy</title>
+<style>
+:root{--bg:#08111f;--panel:#101d30;--panel2:#14243a;--text:#edf5ff;--muted:#9db0c8;--cyan:#35d5e8;--green:#46d39a;--line:#263b55}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#07101d,#0b1a2c);color:var(--text);font:15px/1.55 Inter,system-ui,Arial,sans-serif}
+header{padding:24px max(20px,calc((100% - 1120px)/2));border-bottom:1px solid var(--line);background:#081321}
+.brand{font-weight:800;letter-spacing:.4px;font-size:19px}.brand span{color:var(--cyan)}header p{color:var(--muted);margin:5px 0 0}
+main{max-width:1120px;margin:auto;padding:24px 18px 60px}.hero{padding:26px;border:1px solid #28506a;border-radius:20px;background:linear-gradient(120deg,#102c43,#13243b 65%,#17243b);margin-bottom:20px}
+.eyebrow{color:var(--green);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:1.4px}
+h1{font-size:clamp(27px,5vw,42px);line-height:1.12;margin:9px 0}.hero p{color:#c2d3e5;max-width:720px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:17px}.stat strong{font-size:25px;display:block;color:var(--cyan)}.stat small{color:var(--muted)}
+.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.card h2{font-size:19px;margin:0 0 12px}.muted{color:var(--muted)}.lesson{padding:14px 0;border-top:1px solid var(--line)}.lesson:first-of-type{border-top:0}.lesson h3{font-size:16px;margin:0 0 4px}.lesson p{margin:4px 0;color:var(--muted)}.tag{font-size:11px;color:var(--cyan);font-weight:700}
+button,.upload{border:0;border-radius:10px;padding:10px 14px;background:var(--cyan);color:#05202b;font-weight:800;cursor:pointer;margin-top:8px}button.secondary{background:#203650;color:var(--text);border:1px solid #35516f}
+.progress{height:9px;background:#26384e;border-radius:10px;overflow:hidden;margin:10px 0}.progress div{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));transition:width .2s}
+textarea,input[type=file]{width:100%;background:#091626;color:var(--text);border:1px solid #35516f;border-radius:10px;padding:11px;margin:8px 0}
+.output{background:#091626;border:1px solid var(--line);padding:13px;border-radius:10px;white-space:pre-wrap;min-height:48px;color:#cfe4f7}
+.check{display:flex;gap:10px;align-items:flex-start;margin:10px 0}.check input{margin-top:5px;accent-color:var(--green)}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:12px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.hero{padding:20px}}
+</style>
+</head>
+<body>
+<header><div class="brand">NISAR <span>DATA ANALYTICS</span> ACADEMY</div><p>Learn the skill. Build real projects. Measure your progress.</p></header>
+<main>
+<section class="hero"><div class="eyebrow">Beginner → Practical Analyst</div><h1>Turn raw data into clear decisions.</h1><p>Urdu + English learning path. Short lessons, hands-on exercises, and a built-in CSV checker. Start with one small lesson today.</p><button onclick="document.querySelector('#roadmap').scrollIntoView({behavior:'smooth'})">Start learning</button></section>
+<section class="stats">
+ <div class="stat"><strong id="doneCount">0/7</strong><small>Lessons completed</small></div>
+ <div class="stat"><strong id="percent">0%</strong><small>Learning progress</small></div>
+ <div class="stat"><strong>7</strong><small>Core learning stages</small></div>
+</section>
+<div class="layout">
+<section class="card" id="roadmap"><h2>📚 Your learning roadmap</h2><p class="muted">Har stage ka lesson parhein, practice karein, phir complete mark karein.</p>
+<div id="lessons"></div>
+</section>
+<section>
+<div class="card"><h2>🧪 Practice Lab: CSV Checker</h2><p class="muted">Upload a CSV file to inspect its rows, columns, and empty cells. Your file stays in this browser; it is not uploaded to a server.</p>
+<input id="csvFile" type="file" accept=".csv,text/csv">
+<button id="analyzeBtn">Analyze CSV</button>
+<div id="csvOutput" class="output" style="margin-top:12px">Choose a CSV file to begin.</div>
+</div>
+<div class="card" style="margin-top:18px"><h2>🎯 Today's mini-task</h2><p>Imagine you run an online store. Your sales are:</p><div class="output">Monday: Rs. 2,500
+Tuesday: Rs. 3,000
+Wednesday: Rs. 1,500</div><p><b>Question:</b> What is the total sales amount?</p>
+<textarea id="answer" rows="2" placeholder="Write your answer in Rs..."></textarea><button id="checkAnswer">Check answer</button><div id="answerResult" class="muted" aria-live="polite"></div>
+</div>
+<div class="card" style="margin-top:18px"><h2>🧭 Next step</h2><p class="muted">After the first lessons, we will build a sales dashboard using a real practice dataset.</p><button class="secondary" onclick="alert('Next module: Excel formulas, sorting, filtering, and PivotTables.')">Preview next module</button></div>
+</section>
+</div>
+</main>
+<footer>© 2026 Nisar AI Studio · Learning prototype · Progress is saved only in this browser.</footer>
+<script>
+const lessons=[
+ {title:"Data Analytics kya hai?",tag:"FOUNDATION · 20 MIN",desc:"Data ko collect, clean, study aur explain karke better decisions lena. Example: shop ki daily sales samajhna.",task:"Practice: Apne ghar ya shop ke 5 daily expenses ki list banayein."},
+ {title:"Excel / Google Sheets basics",tag:"SPREADSHEETS · 30 MIN",desc:"Rows, columns, cells, SUM, AVERAGE, sorting aur filters seekhein.",task:"Practice: 7 din ki sales likhein aur =SUM(B2:B8) se total nikalein."},
+ {title:"Data cleaning",tag:"QUALITY · 30 MIN",desc:"Duplicate rows, blank cells, inconsistent dates aur spelling errors identify karein.",task:"Practice: Ek sample list mein duplicate customer names dhoondein."},
+ {title:"SQL fundamentals",tag:"DATABASE · 40 MIN",desc:"SELECT, WHERE, ORDER BY aur GROUP BY se database se useful answers nikaalein.",task:"Practice: SELECT * FROM sales WHERE amount > 1000; ka meaning samjhein."},
+ {title:"Python for analysis",tag:"PYTHON · 45 MIN",desc:"Python basics aur Pandas ka intro: CSV read karna, filter karna aur summary banana.",task:"Practice: Pandas mein df.head() aur df.describe() ka purpose likhein."},
+ {title:"Power BI dashboards",tag:"VISUALIZATION · 45 MIN",desc:"Charts, KPI cards, filters aur interactive reports banana seekhein.",task:"Practice: Monthly sales ke liye bar chart aur total-sales card plan karein."},
+ {title:"Portfolio project",tag:"REAL PROJECT · 60 MIN",desc:"Sales dataset clean karein, analysis karein, dashboard banayein aur findings explain karein.",task:"Practice: 3 insights aur 2 business recommendations likhein."}
+];
+const KEY='nisarAnalyticsProgressV1';
+let completed=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'));
+function render(){
+ const root=document.getElementById('lessons');root.innerHTML='';
+ lessons.forEach((l,i)=>{const el=document.createElement('div');el.className='lesson';
+ const safe=document.createElement('div');safe.innerHTML=`<div class="tag">${l.tag}</div><h3>${String(i+1).padStart(2,'0')}. ${l.title}</h3><p>${l.desc}</p><p><b>Practice:</b> ${l.task.replace('Practice: ','')}</p>`;
+ const label=document.createElement('label');label.className='check';const cb=document.createElement('input');cb.type='checkbox';cb.checked=completed.has(i);cb.addEventListener('change',()=>{cb.checked?completed.add(i):completed.delete(i);localStorage.setItem(KEY,JSON.stringify([...completed]));renderStats();});label.append(cb,document.createTextNode('Mark this lesson complete'));el.append(safe,label);root.append(el);});
+ renderStats();
+}
+function renderStats(){const n=completed.size;document.getElementById('doneCount').textContent=n+'/7';document.getElementById('percent').textContent=Math.round(n/7*100)+'%';}
+function parseCSV(text){
+ const rows=[];let row=[],cell='',quoted=false;
+ for(let i=0;i<text.length;i++){const c=text[i],next=text[i+1];
+  if(c==='"'&&quoted&&next==='"'){cell+='"';i++;}
+  else if(c==='"'){quoted=!quoted;}
+  else if(c===','&&!quoted){row.push(cell);cell='';}
+  else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&next==='\n')i++;row.push(cell);if(row.some(x=>x.trim()!==''))rows.push(row);row=[];cell='';}
+  else cell+=c;
+ }
+ row.push(cell);if(row.some(x=>x.trim()!==''))rows.push(row);return rows;
+}
+document.getElementById('analyzeBtn').addEventListener('click',async()=>{
+ const f=document.getElementById('csvFile').files[0],out=document.getElementById('csvOutput');
+ if(!f){out.textContent='Please choose a CSV file first.';return;}
+ if(f.size>5*1024*1024){out.textContent='File too large. Maximum supported size is 5 MB.';return;}
+ try{const rows=parseCSV(await f.text());if(rows.length<2){out.textContent='CSV needs a header row and at least one data row.';return;}
+ const width=rows[0].length, data=rows.slice(1),missing=Array(width).fill(0);
+ data.forEach(r=>{for(let i=0;i<width;i++)if(!String(r[i]??'').trim())missing[i]++;});
+ out.textContent=`File: ${f.name}\nData rows: ${data.length}\nColumns: ${width}\n\nColumns and empty cells:\n`+rows[0].map((h,i)=>`${h||'(unnamed)'}: ${missing[i]} empty`).join('\n')+'\n\nNote: This is a basic CSV inspection, not a full statistical audit.';
+ }catch(e){out.textContent='Could not read this file as CSV. Check its format and try again.';}
+});
+document.getElementById('checkAnswer').addEventListener('click',()=>{
+ const val=document.getElementById('answer').value.replace(/[,\s]|rs\.?/gi,'');
+ document.getElementById('answerResult').textContent=Number(val)===7000?'Correct! Rs. 7,000. Great work.':'Try again: add 2,500 + 3,000 + 1,500.';
+});
+render();
+</script>
+</body></html>
